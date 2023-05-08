@@ -12,7 +12,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = RegistrationForm()
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, template_name='social_network/register.html', context={'form': form})
