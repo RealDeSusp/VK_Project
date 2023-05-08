@@ -1,10 +1,13 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LogoutView
 from .forms import RegistrationForm
 
 
 def index(request):
-    return HttpResponse("Hello")
+    return render(request, template_name='social_network/base.html')
 
 
 def register(request):
@@ -16,3 +19,15 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, template_name='social_network/register.html', context={'form': form})
+
+
+class LoginUser(LoginView):
+    template_name = 'social_network/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('index')
+
+
+class LogoutUser(LogoutView):
+    def get_success_url(self):
+        return reverse_lazy('index')
