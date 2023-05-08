@@ -9,6 +9,7 @@
     {% endblock %}
 
     {% if user.is_authenticated %}
+        <h2>Welcome, {{ user.username }} </h2>
         <a href="{% url 'logout' %}">Log out</a>
     {% else %}
         <a href="{% url 'login' %}">Log in</a>
