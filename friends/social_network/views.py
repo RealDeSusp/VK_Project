@@ -1,9 +1,12 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LogoutView
 from .forms import RegistrationForm
+from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import AllowAny
+from django.contrib.auth.models import User
+from .serializers import UserSerializer
 
 
 def index(request):
@@ -31,3 +34,9 @@ class LoginUser(LoginView):
 class LogoutUser(LogoutView):
     def get_success_url(self):
         return reverse_lazy('index')
+
+
+class UserCreateAPIView(CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
