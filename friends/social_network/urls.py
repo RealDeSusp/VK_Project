@@ -1,8 +1,9 @@
 from django.urls import path, include
 from .views import *
 
-
 urlpatterns = [
+    path('friend-list/', friend_list, name='friend_list'),
+    path('friendship/', include('friendship.urls')),
     path('', index, name='index'),
     path('register/', register, name='register'),
     path('register_API/', UserCreateAPIView.as_view(), name='register_API'),

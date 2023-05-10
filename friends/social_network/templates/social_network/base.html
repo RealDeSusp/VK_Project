@@ -9,9 +9,11 @@
     {% endblock %}
 
     {% if user.is_authenticated %}
-        <h2>Welcome, {{ user.username }} </h2>
-        <a href="{% url 'logout' %}">Log out</a>
+        <h2>Добро пожаловать, {{ user.username }} </h2>
+        <li><a href="{% url 'friend_list' %}">Список друзей</a></li>
+        <li><a href="{% url 'logout' %}">Log out</a></li>
     {% else %}
-        <a href="{% url 'login' %}">Log in</a>
+        <li><a href="{% url 'login' %}">Log in</a></li>
     {% endif %}
+
 </body>

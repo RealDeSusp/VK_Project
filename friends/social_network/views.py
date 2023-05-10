@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -7,10 +8,20 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from .serializers import UserSerializer
+from friendship.models import Friend
 
 
 def index(request):
     return render(request, template_name='social_network/base.html')
+
+
+@login_required(login_url="/social_network/login/")
+def friend_list(request):
+    # Получаем список друзей текущего пользователя
+    friends = Friend.objects.friends(request.user)
+    print(friends)
+    # Возвращаем шаблон и передаем список друзей в контекст
+    return render(request, template_name='social_network/friend_list.html', context={'friends': friends})
 
 
 def register(request):
