@@ -4,8 +4,10 @@
 <ul>
     {% for friend in friends %}
         <li>{{ friend }}</li>
+    <li><a href="{% url 'index' %}">Back to profile</a></li>
     {% empty %}
         <li>У вас нет друзей</li>
+    <li><a href="{% url 'index' %}">Back to profile</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
