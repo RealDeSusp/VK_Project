@@ -1,7 +1,8 @@
 venv
 .idea
 pycache
-__pycache__
+__py
+
 
 # Django #
 *.log
