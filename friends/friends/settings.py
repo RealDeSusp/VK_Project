@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # openAPI
     'drf_yasg',
+    # для реализации friend_list
     'friendship'
 ]
 

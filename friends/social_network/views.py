@@ -11,10 +11,12 @@ from .serializers import UserSerializer
 from friendship.models import Friend
 
 
+# view базовой страницы
 def index(request):
     return render(request, template_name='social_network/base.html')
 
 
+# view для friend_list
 @login_required(login_url="/social_network/login/")
 def friend_list(request):
     # Получаем список друзей текущего пользователя
@@ -24,6 +26,7 @@ def friend_list(request):
     return render(request, template_name='social_network/friend_list.html', context={'friends': friends})
 
 
+# view регистрации пользователя через html страницу
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -35,6 +38,7 @@ def register(request):
     return render(request, template_name='social_network/register.html', context={'form': form})
 
 
+# view для логина
 class LoginUser(LoginView):
     template_name = 'social_network/login.html'
 
@@ -42,11 +46,13 @@ class LoginUser(LoginView):
         return reverse_lazy('index')
 
 
+# view для выхода из профиля
 class LogoutUser(LogoutView):
     def get_success_url(self):
         return reverse_lazy('index')
 
 
+# view для регистрации через API
 class UserCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
